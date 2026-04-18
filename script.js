@@ -1,52 +1,43 @@
-const yesBtn = document.getElementById("yesBtn")
-const noBtn = document.getElementById("noBtn")
-const question = document.getElementById("question")
-const message = document.getElementById("message")
-const music = document.getElementById("music")
+const yesBtn=document.getElementById("yesBtn")
+const noBtn=document.getElementById("noBtn")
+const question=document.getElementById("question")
+const music=document.getElementById("music")
 
-let yesScale = 1
-let noScale = 1
-let noClicks = 0
-let firstYesClick = true
+let yesScale=1
+let noClicks=0
 
-
-const messages = [
+const messages=[
 
 "Are you sure? 🥺",
-"Really sure? 😭",
-"Last chance...",
+"Really sure?? 😭",
+"Think again...",
+"Last chance!",
 "Don't break my heart 💔",
-"Okay fine... you win 😅"
+"Fine... I give up 😩"
 
 ]
 
 
 function moveNo(){
 
-const btnWidth = noBtn.offsetWidth
-const btnHeight = noBtn.offsetHeight
+const btnWidth=noBtn.offsetWidth
+const btnHeight=noBtn.offsetHeight
 
-const maxX = window.innerWidth - btnWidth - 10
-const maxY = window.innerHeight - btnHeight - 10
+const maxX=window.innerWidth-btnWidth-10
+const maxY=window.innerHeight-btnHeight-10
 
-const x = Math.random() * maxX
-const y = Math.random() * maxY
+const x=Math.random()*maxX
+const y=Math.random()*maxY
 
 noBtn.style.position="fixed"
 noBtn.style.left=x+"px"
 noBtn.style.top=y+"px"
 
-yesScale += 0.15
+yesScale+=0.15
 yesBtn.style.transform=`scale(${yesScale})`
 
-noScale -= 0.05
-
-if(noScale>0.4){
-noBtn.style.transform=`scale(${noScale})`
-}
-
-if(noClicks < messages.length){
-question.innerHTML = messages[noClicks]
+if(noClicks<messages.length){
+question.innerHTML=messages[noClicks]
 }
 
 noClicks++
@@ -54,6 +45,7 @@ noClicks++
 }
 
 
+noBtn.addEventListener("mouseover",moveNo)
 noBtn.addEventListener("click",moveNo)
 noBtn.addEventListener("touchstart",moveNo)
 
@@ -61,18 +53,19 @@ noBtn.addEventListener("touchstart",moveNo)
 
 yesBtn.addEventListener("click",()=>{
 
-if(firstYesClick){
+question.innerHTML="YAYYYY 💖"
 
-message.innerHTML="😏 Too fast! Try pressing NO first"
+document.querySelector(".container").innerHTML=`
 
-firstYesClick=false
-return
+<h1>Birthday Date Confirmed 🎂</h1>
 
-}
+<img src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif">
 
-question.innerHTML="YAYYYYY 🥳"
+<p style="color:white;font-size:20px">
+I can't wait to celebrate with you 💕
+</p>
 
-message.innerHTML="It's a birthday date! 🎂💖"
+`
 
 music.play()
 
@@ -84,9 +77,8 @@ origin:{y:0.6}
 
 startHearts()
 
-showFinalScreen()
-
 })
+
 
 
 function startHearts(){
@@ -105,26 +97,5 @@ document.body.appendChild(heart)
 setTimeout(()=>heart.remove(),5000)
 
 },300)
-
-}
-
-
-function showFinalScreen(){
-
-setTimeout(()=>{
-
-document.querySelector(".container").innerHTML =
-
-`
-
-<h1>Birthday Date Confirmed 🎂💖</h1>
-
-<p style="color:white;font-size:20px">
-Get ready for cake, laughs, and a special day together 🥰
-</p>
-
-`
-
-},2000)
 
 }
